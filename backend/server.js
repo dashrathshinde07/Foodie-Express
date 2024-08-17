@@ -4,6 +4,8 @@ import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
+import userRouter from "./routes/userRoute.js";
+import "dotenv/config";
 
 // App configuration
 const app = express();
@@ -19,6 +21,7 @@ connectDB(); // Establish a connection to the database
 // API endpoint configuration
 app.use("/api/food", foodRouter); // Mount the food router at /api/food
 app.use("/images", express.static("uploads")); // Serve static images from the uploads folder
+app.use("/api/user", userRouter);
 
 // Root route
 app.get("/", (req, res) => {
