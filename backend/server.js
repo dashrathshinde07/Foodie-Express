@@ -6,6 +6,7 @@ import { connectDB } from "./config/db.js";
 import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 import "dotenv/config";
+import cartRouter from "./routes/cartRoute.js";
 
 // App configuration
 const app = express();
@@ -22,6 +23,7 @@ connectDB(); // Establish a connection to the database
 app.use("/api/food", foodRouter); // Mount the food router at /api/food
 app.use("/images", express.static("uploads")); // Serve static images from the uploads folder
 app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);
 
 // Root route
 app.get("/", (req, res) => {
