@@ -7,6 +7,7 @@ import foodRouter from "./routes/foodRoute.js";
 import userRouter from "./routes/userRoute.js";
 import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
+import orderRouter from "./routes/orderRoute.js";
 
 // App configuration
 const app = express();
@@ -24,6 +25,7 @@ app.use("/api/food", foodRouter); // Mount the food router at /api/food
 app.use("/images", express.static("uploads")); // Serve static images from the uploads folder
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 
 // Root route
 app.get("/", (req, res) => {
