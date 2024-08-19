@@ -16,7 +16,7 @@ export const connectDB = async () => {
   await mongoose
     .connect(
       // The connection string for the MongoDB Atlas cluster is stored in an environment variable called DATABASE_URL
-      process.env.DATABASE_URL
+      process.env.MONGO_URI
     )
     .then(() => {
       // If the connection is successful, log a success message to the console
