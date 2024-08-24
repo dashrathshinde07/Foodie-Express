@@ -1,38 +1,33 @@
-// server.js - This file sets up the Express.js server and configures the application
+import express  from "express"
+import cors from 'cors'
+import { connectDB } from "./config/db.js"
+import userRouter from "./routes/userRoute.js"
+import foodRouter from "./routes/foodRoute.js"
+import 'dotenv/config'
+import cartRouter from "./routes/cartRoute.js"
+import orderRouter from "./routes/orderRoute.js"
 
-import express from "express";
-import cors from "cors";
-import { connectDB } from "./config/db.js";
-import foodRouter from "./routes/foodRoute.js";
-import userRouter from "./routes/userRoute.js";
-import "dotenv/config";
-import cartRouter from "./routes/cartRoute.js";
-import orderRouter from "./routes/orderRoute.js";
+// app config
+const app = express()
+const port = process.env.PORT || 4000;
 
-// App configuration
-const app = express();
-const port = 4000;
 
-// Middleware configuration
-app.use(express.json()); // Enable JSON parsing for request bodies
-app.use(cors()); // Enable CORS for cross-origin requests
+// middlewares
+app.use(express.json())
+app.use(cors())
 
-// Database connection
-connectDB(); // Establish a connection to the database
+// db connection
+connectDB()
 
-// API endpoint configuration
-app.use("/api/food", foodRouter); // Mount the food router at /api/food
-app.use("/images", express.static("uploads")); // Serve static images from the uploads folder
-app.use("/api/user", userRouter);
-app.use("/api/cart", cartRouter);
-app.use("/api/order", orderRouter);
+// api endpoints
+app.use("/api/user", userRouter)
+app.use("/api/food", foodRouter)
+app.use("/images",express.static('uploads'))
+app.use("/api/cart", cartRouter)
+app.use("/api/order",orderRouter)
 
-// Root route
 app.get("/", (req, res) => {
-  res.send("API WORKING"); // Return a success message for the root route
-});
+    res.send("API Working")
+  });
 
-// Start the server
-app.listen(port, () => {
-  console.log(`Server Started on http://localhost:${port}`); // Log a message when the server starts
-});
+app.listen(port, () => console.log(`Server started on http://localhost:${port}`))

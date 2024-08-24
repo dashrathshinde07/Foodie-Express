@@ -1,28 +1,14 @@
-import express from "express";
-import authMiddleware from "../middleware/auth.js";
-import {
-  listOrders,
-  placeOrder,
-  updateStatus,
-  userOrders,
-  verifyOrder,
-} from "../controllers/orderController.js";
+import express from 'express';
+import authMiddleware from '../middleware/auth.js';
+import { listOrders, placeOrder,updateStatus,userOrders, verifyOrder, placeOrderCod } from '../controllers/orderController.js';
 
 const orderRouter = express.Router();
 
-// Route for placing an order, requires authentication
-orderRouter.post("/place", authMiddleware, placeOrder);
+orderRouter.get("/list",listOrders);
+orderRouter.post("/userorders",authMiddleware,userOrders);
+orderRouter.post("/place",authMiddleware,placeOrder);
+orderRouter.post("/status",updateStatus);
+orderRouter.post("/verify",verifyOrder);
+orderRouter.post("/placecod",authMiddleware,placeOrderCod);
 
-// Route for verifying an order payment
-orderRouter.post("/verify", verifyOrder);
-
-//Route for user's order
-orderRouter.post("/userorders", authMiddleware, userOrders);
-
-//Route for get all orders in admin panel
-orderRouter.get("/list", listOrders);
-
-//Route for update status of order
-orderRouter.post("/status", updateStatus);
-
-export default orderRouter; // Export the router
+export default orderRouter;
