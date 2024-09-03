@@ -30,6 +30,7 @@ const List = () => {
       toast.error("Error")
     }
   }
+  
 
   useEffect(() => {
     fetchList();
