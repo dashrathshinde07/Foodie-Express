@@ -7,6 +7,12 @@ import "dotenv/config";
 import cartRouter from "./routes/cartRoute.js";
 import orderRouter from "./routes/orderRoute.js";
 import connectCloudinary from "./config/cloudinary.js";
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+
+// Derive the directory name from the URL
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 // app config
 const app = express();
@@ -23,7 +29,8 @@ connectCloudinary();
 // api endpoints
 app.use("/api/user", userRouter);
 app.use("/api/food", foodRouter);
-// app.use("/images", express.static("uploads"));
+// app.use('/images', express.static(path.join(__dirname, 'images')));
+
 app.use("/api/cart", cartRouter);
 app.use("/api/order", orderRouter);
 

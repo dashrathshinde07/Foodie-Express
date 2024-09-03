@@ -5,6 +5,7 @@ import profile_image from './profile_image.png'
 import upload_area from './upload_area.png'
 import parcel_icon from './parcel_icon.png'
 
+
 export const url = 'https://foodie-express-backend.onrender.com'
 export const currency = '₹'
 
