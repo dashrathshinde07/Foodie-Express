@@ -21,6 +21,11 @@ const Add = () => {
       return;
     }
 
+    if (data.price <= 0) {
+      toast.error("Price must be a positive number.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("name", data.name);
     formData.append("description", data.description);
@@ -56,8 +61,7 @@ const Add = () => {
   };
 
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     setData((prevData) => ({ ...prevData, [name]: value }));
   };
 
@@ -66,7 +70,7 @@ const Add = () => {
     if (file) {
       setImage(file);
       // Clean up old URL to prevent memory leaks
-      URL.revokeObjectURL(image);
+      URL.revokeObjectURL(URL.createObjectURL(image));
     }
   };
 
@@ -86,7 +90,7 @@ const Add = () => {
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
               alt="Upload Preview"
-              onLoad={() => URL.revokeObjectURL(image)}
+              onLoad={() => URL.revokeObjectURL(URL.createObjectURL(image))}
             />
           </label>
         </div>
@@ -138,6 +142,8 @@ const Add = () => {
               onChange={onChangeHandler}
               value={data.price}
               placeholder="25"
+              min="0"
+              step="0.01"
               required
             />
           </div>
